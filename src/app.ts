@@ -1,6 +1,7 @@
 import { Header, PageID } from './components/header/header';
 import { Page } from './components/templates/page';
 import { MainPage } from './components/main-page/main-page';
+import { Statistic } from './components/statistic-page/statistic-page';
 
 export class App {
   static contaiter: HTMLElement = document.body;
@@ -16,7 +17,10 @@ export class App {
     }
     let page: Page | null = null;
 
-    if (idPage) {
+    if (idPage =='statistic'){
+      page = new Statistic(idPage)
+    }
+    else {
       page = new MainPage(idPage);
     }
 
@@ -38,9 +42,11 @@ export class App {
     this.header = new Header('header', 'head-menu');
   }
 
+
   start = () => {
     App.contaiter.append(this.header.render());
     App.renderPage('garage');
+    this.header.burgerMenu()
     this.enableChange();
   };
 }

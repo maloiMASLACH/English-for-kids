@@ -1,0 +1,23 @@
+.main-page-content{
+  background-color: rgb(255, 249, 249);
+  display: flex;
+  flex-direction:column
+}
+.main-page-content div{
+  margin: 0 auto;
+  justify-content: center;
+  align-items: center;
+  border-bottom: solid 3px wheat;
+  margin-bottom: 20px;
+}
+.main-page-content div p{
+  text-transform: uppercase;
+  font-size: 3vw;
+}
+.main-page-content div img{
+  margin: 0 auto;
+  width: 20vw;
+  height: 20vw;
+  border-radius: 50%;
+}
+

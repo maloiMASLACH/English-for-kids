@@ -1,4 +1,6 @@
 export interface ImageCategoryModel {
-  category: string,
-  images: string[];
+  word: string,
+  translation: string,
+  image:string,
+  audioSrc:string
 }

@@ -12,7 +12,6 @@ export class CardsField extends BaseComponent {
   }
 
   clear():void {
-    console.log(this.element);
     this.cards = [];
     this.element.innerHTML = '';
     if (document.querySelectorAll('.cards').length !== 1) {
@@ -25,7 +24,6 @@ export class CardsField extends BaseComponent {
       document.querySelector('.cards')?.remove();
     }
     if (document.querySelectorAll('.main-page-content').length !== 0) {
-      console.log('e');
       document.querySelectorAll('.main-page-content').forEach((a) => {
         a.remove();
       });
@@ -37,15 +35,12 @@ export class CardsField extends BaseComponent {
       document.querySelector('.cards')?.remove();
     }
     if (document.querySelectorAll('.main-page-content').length !== 1) {
-      console.log('e');
       document.querySelector('.main-page-content')?.remove();
     }
   };
 
   addCards(cards: Card[]) :void {
-    console.log(cards);
     this.cards = cards;
-    this.cards.forEach((card) => console.log(card.element));
     this.cards.forEach((card) => this.element.appendChild(card.element));
   }
 }

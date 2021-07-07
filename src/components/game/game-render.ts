@@ -16,7 +16,14 @@ export class Render {
     const cat = categories[sessionStorage.currentID];
 
     //  const media = cat.map(()=>`${cat.word}`)
-    this.game.initGame(cat);
+    await this.game.initGame(cat);
+    const cards = document.querySelectorAll('.card');
+    cards.forEach((card) => {
+      if (document.querySelector('input')?.checked) {
+        card.classList.add('active');
+      }
+    });
+    // await new MainPage('mian').startBtnCheck()
     /* const cat = categories[Math.floor(Math.random() * (10 - 0))];
     const images = cat.images.map((name) => `${cat.category}/${name}`);
 

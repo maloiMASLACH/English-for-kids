@@ -14,8 +14,8 @@
 }
 .card {
   position: relative;
-  width: 17vw;
-  height: 17vw;
+  width: 14vw;
+  height: 14vw;
   transform-style: preserve-3d;
   transition: all .3s;
   transform-origin: right;
@@ -33,6 +33,11 @@
 }
 .card.active .card-image{
   height: 100%;
+}
+.card.passed{
+  opacity: 0.5;
+  transition: 1s;
+  pointer-events: none;
 }
 
 .card-front,

@@ -19,7 +19,6 @@ export class App {
 
     if (idPage === 'statistic') {
       page = new Statistic(idPage);
-      console.log('eyp');
     } else {
       page = new MainPage(idPage);
     }

@@ -6,34 +6,96 @@ import { delay } from '../delay/delay';
 import './main-page.scss';
 
 export class MainPage extends Page {
-  giveSound(soundCon:string[], cards:NodeListOf<Element>) {
-    if (!sessionStorage.currentWord) {
-      const soundNumber = Math.floor(Math.random() * soundCon.length);
-      sessionStorage.setItem('currentWord', `${soundNumber}`);
+  async gameRes() {
+    const result = document.createElement('div');
+    result.className = 'result';
+    const misstakes = document.querySelectorAll('.starLoose').length;
+    console.log(misstakes);
+    if (misstakes !== 0) {
       const sound = document.createElement('div');
-      sound.innerHTML = `<audio src="./audio/${sessionStorage.current}/${soundCon[sessionStorage.currentWord]}.mp3" autoplay="autoplay"></audio>`;
-      this.conteiner.append(sound);
-      cards.forEach((card) => {
-        const textCon = (<HTMLAreaElement>card.children[0].children[1].children[1]).textContent;
-        card.addEventListener('click', () => {
-          console.log(textCon, soundCon[sessionStorage.currentWord]);
-          if (textCon === soundCon[sessionStorage.currentWord]) {
-            soundCon.splice(+sessionStorage.currentWord, 1);
-            sessionStorage.removeItem('currentWord');
-            this.giveSound(soundCon, cards);
-          }
-        });
-      });
+      sound.innerHTML = '<audio src="failure.mp3" autoplay="autoplay"></audio>';
+      result.append(sound);
+      const img = document.createElement('img');
+      img.src = 'failure.jpg';
+      const text = document.createElement('p');
+      if (misstakes === 1) {
+        text.textContent = `${misstakes} misstake`;
+      } else {
+        text.textContent = `${misstakes} misstakes`;
+      }
+      result.append(img);
+      result.append(text);
+    } else {
+      const sound = document.createElement('div');
+      sound.innerHTML = '<audio src="sucsess.mp3" autoplay="autoplay"></audio>';
+      result.append(sound);
+      const img = document.createElement('img');
+      img.src = 'success.jpg';
+      const text = document.createElement('p');
+      text.textContent = 'Complete';
+      result.append(img);
+      result.append(text);
     }
-    if (soundCon.length === 0) {
-      alert('end');
+    this.conteiner.append(result);
+    await delay(2000);
+    await this.renderAgain();
+  }
+
+  renderStar(winCheck:number) {
+    if (winCheck === 1) {
+      const star = document.createElement('img');
+      star.className = 'star starWin';
+      star.src = 'starWin.png';
+      document.querySelector('.starCon')?.append(star);
+      if (document.querySelectorAll('.starWin').length === 8) {
+        this.gameRes();
+      }
+    }
+    if (winCheck === 0) {
+      const star = document.createElement('img');
+      star.className = 'star starLoose';
+      star.src = 'starLoose.png';
+      document.querySelector('.starCon')?.append(star);
     }
   }
 
-  repeatSound(soundCon:string[]) {
+  createSound(textCon:string, shuffledArr:string[], card:Element) {
+    if (textCon === shuffledArr[0]) {
+      const sound = document.createElement('div');
+      sound.innerHTML = `<audio src="./audio/${sessionStorage.current}/${shuffledArr[1]}.mp3" autoplay="autoplay"></audio>`;
+      this.conteiner.append(sound);
+      card.classList.add('passed');
+      shuffledArr.splice(0, 1);
+      this.renderStar(1);
+    } else {
+      const soundFalse = document.createElement('div');
+      soundFalse.innerHTML = `<audio src="./audio/${sessionStorage.current}/${shuffledArr[0]}.mp3" autoplay="autoplay"></audio>`;
+      this.conteiner.append(soundFalse);
+      this.renderStar(0);
+    }
+  }
+
+  giveSoundMain(soundCon:string[], cards:NodeListOf<Element>) {
+    const stars = (document.createElement('div'));
+    stars.className = 'starCon';
+    this.conteiner.append(stars);
+    const shuffledArr = soundCon.sort(() => Math.random() - 0.5);
     const sound = document.createElement('div');
-    sound.innerHTML = `<audio src="./audio/${sessionStorage.current}/${soundCon[sessionStorage.currentWord]}.mp3" autoplay="autoplay"></audio>`;
+    sound.innerHTML = `<audio src="./audio/${sessionStorage.current}/${shuffledArr[0]}.mp3" autoplay="autoplay"></audio>`;
     this.conteiner.append(sound);
+    console.log(shuffledArr);
+    cards.forEach((card) => {
+      card.addEventListener('click', () => {
+        const textCon = (<HTMLAreaElement>card.children[0].children[1].children[1]).textContent;
+        console.log(textCon);
+        if (textCon) this.createSound(textCon, shuffledArr, card);
+      });
+    });
+    document.querySelector('.repeatBTN')?.addEventListener('click', () => {
+      const soundR = document.createElement('div');
+      soundR.innerHTML = `<audio src="./audio/${sessionStorage.current}/${shuffledArr[0]}.mp3" autoplay="autoplay"></audio>`;
+      this.conteiner.append(soundR);
+    });
   }
 
   gamePlay() {
@@ -51,13 +113,10 @@ export class MainPage extends Page {
       const word = (<HTMLAreaElement>card.children[0].children[1].children[1]).textContent;
       if (word) soundCon[soundCon.length] = word;
     });
-    this.giveSound(soundCon, cards);
-    document.querySelector('.repeatBTN')?.addEventListener('click', () => {
-      this.repeatSound(soundCon);
-    });
+    this.giveSoundMain(soundCon, cards);
   }
 
-  startBTN() {
+  async startBTN() {
     const btn = document.createElement('div');
     btn.className = 'startBTN';
     const btnText = document.createElement('p');
@@ -81,7 +140,10 @@ export class MainPage extends Page {
       categ.addEventListener('click', () => {
         sessionStorage.setItem('current', `${categ.textContent}`);
         sessionStorage.setItem('currentID', `${categ.id}`);
-        if (appElem) new Render(appElem).newGame();
+        if (appElem) {
+          new Render(appElem).newGame();
+          this.startBtnCheck();
+        }
       });
     });
   };
@@ -94,8 +156,10 @@ export class MainPage extends Page {
       categ.addEventListener('click', () => {
         sessionStorage.setItem('current', `${categ.children[1].textContent}`);
         sessionStorage.setItem('currentID', `${categ.children[1].id}`);
-        if (appElem) new Render(appElem).newGame();
-        this.startBtnCheck();
+        if (appElem) {
+          new Render(appElem).newGame();
+          this.startBtnCheck();
+        }
       });
     });
   }
@@ -123,6 +187,8 @@ export class MainPage extends Page {
   }
 
   async renderAgain() {
+    document.querySelector('.result')?.remove();
+    document.querySelector('.starCon')?.remove();
     document.querySelector('.startBTN')?.remove();
     document.querySelector('.repeatBTN')?.remove();
     await this.renderPart();
@@ -132,6 +198,7 @@ export class MainPage extends Page {
   async startBtnCheck() {
     const check = document.querySelector('input');
     if ((check?.checked) && (!document.querySelector('.startBTN')) && (document.querySelector('.cards'))) {
+      console.log('312');
       await this.startBTN();
     }
   }
@@ -157,12 +224,6 @@ export class MainPage extends Page {
 
   render() {
     sessionStorage.setItem('game', '0');
-    /* if (sessionStorage.maincheck === '0') {
-
-    } else {
-      sessionStorage.setItem('maincheck', '0');
-
-    } */
     document.querySelector('a[href=\'#main\']')?.addEventListener('click', () => {
       this.renderAgain();
     });
@@ -171,6 +232,7 @@ export class MainPage extends Page {
     this.conteiner.append(title);
     this.chooseCat();
     this.gameMode();
+
     return this.conteiner;
   }
 }

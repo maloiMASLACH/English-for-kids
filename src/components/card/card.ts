@@ -9,7 +9,6 @@ export class Card extends BaseComponent {
 
   constructor(readonly card: ImageCategoryModel) {
     super('div', ['card-container']);
-    console.log(card);
     this.element.innerHTML = `
      <div class="card">
        <div class="card-front">

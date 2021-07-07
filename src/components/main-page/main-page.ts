@@ -138,8 +138,12 @@ export class MainPage extends Page {
     const categArr = document.querySelectorAll('.burger p');
     categArr.forEach((categ) => {
       categ.addEventListener('click', () => {
+        categArr.forEach((cat) => {
+          cat.classList.remove('currentTitle');
+        });
         sessionStorage.setItem('current', `${categ.textContent}`);
         sessionStorage.setItem('currentID', `${categ.id}`);
+        categ.classList.add('currentTitle');
         if (appElem) {
           new Render(appElem).newGame();
           this.startBtnCheck();

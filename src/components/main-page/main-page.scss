@@ -15,11 +15,16 @@
 }
 
 .main-page-content div{
+  transition: 0.3s;
   margin: 5% auto;
   justify-content: center;
   align-items: center;
   border-bottom: solid 3px wheat;
   margin-bottom: 20px;
+}
+.main-page-content div:hover{
+  transition: 0.3s;
+  transform: scale(1.01);
 }
 .main-page-content div p{
   text-transform: uppercase;

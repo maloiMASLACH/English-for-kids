@@ -157,18 +157,16 @@ export class MainPage extends Page {
 
   render() {
     sessionStorage.setItem('game', '0');
-    if (sessionStorage.maincheck === '0') {
-      document.querySelector('a[href=\'#main\']')?.addEventListener('click', () => {
-        this.renderAgain();
-      });
+    /* if (sessionStorage.maincheck === '0') {
+
     } else {
       sessionStorage.setItem('maincheck', '0');
+
+    } */
+    document.querySelector('a[href=\'#main\']')?.addEventListener('click', () => {
       this.renderAgain();
-    }
-    if (!sessionStorage.firstload) {
-      this.renderPart();
-      sessionStorage.setItem('firstload', '1');
-    }
+    });
+    this.renderAgain();
     const title = this.createHeader('');
     this.conteiner.append(title);
     this.chooseCat();

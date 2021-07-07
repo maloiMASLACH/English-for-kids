@@ -5,9 +5,9 @@ import { CardsField } from '../card-field/card-field';
 
 export class Statistic extends Page {
   render() {
-      const body = document.querySelector('body');
+    const body = document.querySelector('body');
     if (body) {
-   //   body.children[1].remove();
+      //   body.children[1].remove();
       new CardsField().clearFormainPage();
       console.log(body.children[1]);
     }

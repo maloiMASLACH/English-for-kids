@@ -17,10 +17,10 @@ export class App {
     }
     let page: Page | null = null;
 
-    if (idPage =='statistic'){
-      page = new Statistic(idPage)
-    }
-    else {
+    if (idPage === 'statistic') {
+      page = new Statistic(idPage);
+      console.log('eyp');
+    } else {
       page = new MainPage(idPage);
     }
 
@@ -42,11 +42,11 @@ export class App {
     this.header = new Header('header', 'head-menu');
   }
 
-
   start = () => {
+    sessionStorage.removeItem('firstload');
     App.contaiter.append(this.header.render());
-    App.renderPage('garage');
-    this.header.burgerMenu()
+    App.renderPage('main');
+    this.header.burgerMenu();
     this.enableChange();
   };
 }

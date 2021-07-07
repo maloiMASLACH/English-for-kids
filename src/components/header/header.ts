@@ -21,55 +21,53 @@ const swithcher = `<p>
   <input type="checkbox">
   <span class="checkbox-green-switch" data-label-on="Play" data-label-off="Train"></span>
 </label>
-</p>`
+</p>`;
 
 export class Header extends Component {
+  burgerMenu() {
+    const menuBTN = document.querySelector('header img');
 
-  burgerMenu(){
-    const menuBTN= document.querySelector('header img')
-
-    if (!menuBTN?.classList.contains('active')){
-      menuBTN?.addEventListener('click',()=>{
-        menuBTN.classList.add("active")
-        document.querySelector('.burger')?.classList.add('active')
-        this.burgerMenu()
-      })
-    }else{
-      menuBTN?.addEventListener('click',()=>{
-        menuBTN.classList.remove("active")
-        document.querySelector('.burger')?.classList.remove('active')
-        this.burgerMenu()
-      })
-      document.querySelector('.burgerBack')?.addEventListener('click',()=>{
-        menuBTN.classList.remove("active")
-        document.querySelector('.burger')?.classList.remove('active')
-        this.burgerMenu()
-      })
-      document.querySelectorAll('.burger p').forEach((tag)=>{
-        tag.addEventListener('click',()=>{
-          menuBTN.classList.remove("active")
-        document.querySelector('.burger')?.classList.remove('active')
-        this.burgerMenu()
-        })
-      })
+    if (!menuBTN?.classList.contains('active')) {
+      menuBTN?.addEventListener('click', () => {
+        menuBTN.classList.add('active');
+        document.querySelector('.burger')?.classList.add('active');
+        this.burgerMenu();
+      });
+    } else {
+      menuBTN?.addEventListener('click', () => {
+        menuBTN.classList.remove('active');
+        document.querySelector('.burger')?.classList.remove('active');
+        this.burgerMenu();
+      });
+      document.querySelector('.burgerBack')?.addEventListener('click', () => {
+        menuBTN.classList.remove('active');
+        document.querySelector('.burger')?.classList.remove('active');
+        this.burgerMenu();
+      });
+      document.querySelectorAll('.burger p').forEach((tag) => {
+        tag.addEventListener('click', () => {
+          menuBTN.classList.remove('active');
+          document.querySelector('.burger')?.classList.remove('active');
+          this.burgerMenu();
+        });
+      });
     }
   }
 
-
   renderHeader() {
-    const burgerBack= document.createElement('div')
-    burgerBack.className='burgerBack'
-    const themes = document.createElement('div')
-    themes.className="burger"
-    let val=0;
-    packs.forEach((theme)=>{
-      const themeBTN =document.createElement('p')
-      themeBTN.innerText = theme
-      themeBTN.id=`${val}`
-      val++
-      themes.append(themeBTN)
-    })
-    themes.append(burgerBack)
+    const burgerBack = document.createElement('div');
+    burgerBack.className = 'burgerBack';
+    const themes = document.createElement('div');
+    themes.className = 'burger';
+    let val = 0;
+    packs.forEach((theme) => {
+      const themeBTN = document.createElement('p');
+      themeBTN.innerText = theme;
+      themeBTN.id = `${val}`;
+      val++;
+      themes.append(themeBTN);
+    });
+    themes.append(burgerBack);
     const padeBTNS = document.createElement('div');
     Buttons.forEach((button) => {
       const buttonHTML = document.createElement('a');
@@ -80,17 +78,16 @@ export class Header extends Component {
     const flag = document.createElement('img');
     flag.src = 'united-kingdom.png';
     flag.height = 60;
-    this.conteiner.append(themes)
+    this.conteiner.append(themes);
     this.conteiner.append(flag);
     this.conteiner.append(padeBTNS);
-    this.conteiner.innerHTML += swithcher
+    this.conteiner.innerHTML += swithcher;
 
     return this.conteiner;
   }
 
-
-   render() {
-    this.renderHeader()
+  render() {
+    this.renderHeader();
     return this.conteiner;
   }
 }

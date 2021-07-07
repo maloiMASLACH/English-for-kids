@@ -1,6 +1,6 @@
 import { BaseComponent } from '../base-component';
 import { ImageCategoryModel } from './image-category-models';
-import './card.css'
+import './card.css';
 
 const FLIP_CLASS = 'flipped';
 
@@ -9,7 +9,7 @@ export class Card extends BaseComponent {
 
   constructor(readonly card: ImageCategoryModel) {
     super('div', ['card-container']);
-    console.log(card)
+    console.log(card);
     this.element.innerHTML = `
      <div class="card">
        <div class="card-front">
@@ -27,9 +27,10 @@ export class Card extends BaseComponent {
      </div>
      `;
   }
-  async audio(){
-    const sound =`<audio src="./audio/${sessionStorage.current}/${this.card.audioSrc.split('/')[1]}" autoplay="none"></audio>`;
-    this.element.innerHTML += sound
+
+  async audio() {
+    const sound = `<audio src="./audio/${sessionStorage.current}/${this.card.audioSrc.split('/')[1]}" autoplay="none"></audio>`;
+    this.element.innerHTML += sound;
   }
 
   flipToBack():Promise<void> {

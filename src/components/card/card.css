@@ -7,16 +7,32 @@
   cursor: pointer;
   margin: 1%;
 }
-
+@media screen and (max-width: 600px) {
+  .card-container{
+    margin: 10%;
+  }
+}
 .card {
   position: relative;
-  width: 7rem;
-  height: 7rem;
+  width: 17vw;
+  height: 17vw;
   transform-style: preserve-3d;
   transition: all .3s;
   transform-origin: right;
   box-shadow: 0 0 .25rem black;
   border-radius: .5rem;
+}
+.card p{
+  font-size: 3vw;
+}
+.card.active .card-info{
+  display: none;
+}
+.card.active p{
+  display: none;
+}
+.card.active .card-image{
+  height: 100%;
 }
 
 .card-front,
@@ -47,13 +63,14 @@
   background-size: cover;
 }
 .card-info{
-  padding-top: 5px;
+  padding-top: 0.5vw;
   display: flex;
   justify-content: space-around;
 }
 .card-info img{
   padding-right: 10px;
-  width: 15%;
+  width: 3vw;
+  height: 3vw;
 }
 
 .card-container:hover > .card {

@@ -10,7 +10,6 @@ export class MainPage extends Page {
     const result = document.createElement('div');
     result.className = 'result';
     const misstakes = document.querySelectorAll('.starLoose').length;
-    console.log(misstakes);
     if (misstakes !== 0) {
       const sound = document.createElement('div');
       sound.innerHTML = '<audio src="failure.mp3" autoplay="autoplay"></audio>';
@@ -65,9 +64,15 @@ export class MainPage extends Page {
       sound.innerHTML = `<audio src="./audio/${sessionStorage.current}/${shuffledArr[1]}.mp3" autoplay="autoplay"></audio>`;
       this.conteiner.append(sound);
       card.classList.add('passed');
+      const val = localStorage.getItem(`${textCon}Win`);
+      if (val) localStorage.setItem(`${textCon}Win`, `${+val + 1}`);
+      console.log(localStorage.getItem(`${textCon}Win`));
       shuffledArr.splice(0, 1);
       this.renderStar(1);
     } else {
+      const val = localStorage.getItem(`${textCon}Loose`);
+      if (val) localStorage.setItem(`${textCon}Loose`, `${+val + 1}`);
+      console.log(localStorage.getItem(`${textCon}Loose`));
       const soundFalse = document.createElement('div');
       soundFalse.innerHTML = `<audio src="./audio/${sessionStorage.current}/${shuffledArr[0]}.mp3" autoplay="autoplay"></audio>`;
       this.conteiner.append(soundFalse);
@@ -83,11 +88,9 @@ export class MainPage extends Page {
     const sound = document.createElement('div');
     sound.innerHTML = `<audio src="./audio/${sessionStorage.current}/${shuffledArr[0]}.mp3" autoplay="autoplay"></audio>`;
     this.conteiner.append(sound);
-    console.log(shuffledArr);
     cards.forEach((card) => {
       card.addEventListener('click', () => {
         const textCon = (<HTMLAreaElement>card.children[0].children[1].children[1]).textContent;
-        console.log(textCon);
         if (textCon) this.createSound(textCon, shuffledArr, card);
       });
     });
@@ -210,6 +213,7 @@ export class MainPage extends Page {
   }
 
   async renderAgain() {
+    document.querySelector('footer')?.remove();
     document.querySelector('.result')?.remove();
     document.querySelector('.starCon')?.remove();
     document.querySelector('.startBTN')?.remove();

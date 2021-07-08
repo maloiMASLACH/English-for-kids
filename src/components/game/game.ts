@@ -26,7 +26,18 @@ export class Game extends BaseComponent {
     const cards = images
       .map((url:ImageCategoryModel) => new Card(url));
     cards.forEach((card:Card) => {
-      card.element.addEventListener('click', (e) => this.checkEvent(card, e));
+      const { word } = card.card;
+      if (!localStorage.getItem(`${word}`)) {
+        localStorage.setItem(`${word}`, '0');
+        localStorage.setItem(`${word}Win`, '0');
+        localStorage.setItem(`${word}Loose`, '0');
+      }
+      card.element.addEventListener('click', (e) => {
+        this.checkEvent(card, e);
+        const val = localStorage.getItem(`${word}`);
+        if ((val) && (!document.querySelector('.repeatBTN'))) localStorage.setItem(`${word}`, `${+val + 1}`);
+        console.log(localStorage.getItem(`${word}`), word);
+      });
     });
     this.cardsField.addCards(cards);
   }

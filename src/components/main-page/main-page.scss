@@ -8,11 +8,7 @@
   flex-wrap: wrap;
 }
 
-@media screen and (max-width: 600px) {
-  .main-page-content{
-    max-width: 40vw;
-  }
-}
+
 
 .main-page-content div{
   transition: 0.3s;
@@ -88,4 +84,32 @@
   display: flex;
   margin: 0 auto;
   font-size: 4vw;
+}
+footer{
+  width: 90vw;
+  height: 10vw;
+  align-items: flex-end;
+  position: absolute;
+  display: flex;
+  margin: 0 auto;
+  bottom: 0;
+  justify-content: space-around;
+  margin-bottom: -15vw;
+}
+footer p{
+  margin: 0 ;
+  width: 10vw;
+  font-size: 3vw;
+}
+footer img{
+  width: 8vw;
+}
+
+@media screen and (max-width: 600px) {
+  .main-page-content{
+    max-width: 40vw;
+  }
+  footer{
+    margin-bottom: -5vw;
+  }
 }

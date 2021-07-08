@@ -168,6 +168,16 @@ export class MainPage extends Page {
     });
   }
 
+  footer = () => {
+    const block = document.createElement('footer');
+    block.innerHTML = `
+    <p>2021</p>
+    <a href="https://github.com/maloiMASLACH"><p >My Git</p></a>
+    <a href="https://rs.school/js/"><img src="logo.png" ></a>
+    `;
+    document.querySelector('body')?.append(block);
+  };
+
   async renderPart() {
     const block = document.createElement('div');
     block.className = 'main-page-content';
@@ -236,7 +246,7 @@ export class MainPage extends Page {
     this.conteiner.append(title);
     this.chooseCat();
     this.gameMode();
-
+    this.footer();
     return this.conteiner;
   }
 }

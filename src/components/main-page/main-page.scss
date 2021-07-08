@@ -1,0 +1,115 @@
+.main-page-content{
+  margin: 0 auto;
+  background-color: rgb(255, 249, 249);
+  display: flex;
+  min-width: 0vw;
+  max-width: 80vw;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+
+
+.main-page-content div{
+  transition: 0.3s;
+  margin: 5% auto;
+  justify-content: center;
+  align-items: center;
+  border-bottom: solid 3px wheat;
+  margin-bottom: 20px;
+}
+.main-page-content div:hover{
+  transition: 0.3s;
+  transform: scale(1.01);
+}
+.main-page-content div p{
+  text-transform: uppercase;
+  font-size: 3vw;
+}
+.main-page-content div img{
+  margin: 0 auto;
+  width: 17vw;
+  height: 17vw;
+  border-radius: 50%;
+}
+.startBTN,
+.repeatBTN{
+  display: flex;
+  margin: 3vw auto;
+  width: 50vw;
+  height: 6vw;
+  background-color: rgb(228, 255, 255);
+  text-align: center;
+}
+.startBTN p,
+.repeatBTN p
+{
+  background-image: -webkit-gradient( linear, left top, right top, color-stop(0, #f22), color-stop(0.15, #f2f), color-stop(0.3, #22f), color-stop(0.45, rgb(96, 233, 233)), color-stop(0.6, #2f2),color-stop(0.75, rgb(9, 207, 9)), color-stop(0.9, #ff2), color-stop(1, rgb(255, 124, 2)) );
+  background-image: gradient( linear, left top, right top, color-stop(0, rgb(158, 6, 6)), color-stop(0.15, #f2f), color-stop(0.3, #22f), color-stop(0.45, rgb(55, 226, 226)), color-stop(0.6, #2f2),color-stop(0.75, #2f2), color-stop(0.9, #ff2), color-stop(1, #f22) );
+  color:transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  text-decoration: none;
+  font-size: 3.5vw;
+  font-weight: bolder;
+  font-family:cursive;
+
+  margin: 0 auto;
+}
+.starCon{
+  width: 80vw;
+  height: 7vw;
+}
+.star{
+  width: 7vw;
+}
+.result{
+  display: inline;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 100;
+  background-color: lightblue;
+}
+.result img{
+  display: flex;
+  margin: 0 auto;
+  width: 30vw;
+  height: 30vw;
+}
+.result p{
+  justify-content: center;
+  display: flex;
+  margin: 0 auto;
+  font-size: 4vw;
+}
+footer{
+  width: 90vw;
+  height: 10vw;
+  align-items: flex-end;
+  position: absolute;
+  display: flex;
+  margin: 0 auto;
+  bottom: 0;
+  justify-content: space-around;
+  margin-bottom: -15vw;
+}
+footer p{
+  margin: 0 ;
+  width: 10vw;
+  font-size: 3vw;
+}
+footer img{
+  width: 8vw;
+}
+
+@media screen and (max-width: 600px) {
+  .main-page-content{
+    max-width: 40vw;
+  }
+  footer{
+    margin-bottom: -5vw;
+  }
+}

@@ -1,0 +1,199 @@
+header{
+  margin: 0 auto;
+  padding: 0;
+  display: flex;
+  background-color: rgb(255, 249, 249);
+  border-radius: 30px;
+}
+header img {
+  position: absolute;
+  z-index: 220;
+  transition: 0.3s;
+  margin-right: 30px;
+}
+header img:hover{
+  transform: scale(1.05);
+  transition: 0.3s;
+}
+header img.active{
+  transition: 0.3s;
+  margin-left: 11%;
+}
+header div{
+  overflow: hidden;
+  display: flex;
+  justify-content:space-evenly;
+  align-items: center;
+  margin: 0 auto;
+  height: 60px;
+  width: 90vw;
+}
+header div a{
+  background-image: -webkit-gradient( linear, left top, right top, color-stop(0, #f22), color-stop(0.15, #f2f), color-stop(0.3, #22f), color-stop(0.45, rgb(96, 233, 233)), color-stop(0.6, #2f2),color-stop(0.75, rgb(9, 207, 9)), color-stop(0.9, #ff2), color-stop(1, rgb(255, 124, 2)) );
+  background-image: gradient( linear, left top, right top, color-stop(0, rgb(158, 6, 6)), color-stop(0.15, #f2f), color-stop(0.3, #22f), color-stop(0.45, rgb(55, 226, 226)), color-stop(0.6, #2f2),color-stop(0.75, #2f2), color-stop(0.9, #ff2), color-stop(1, #f22) );
+  color:transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  text-decoration: none;
+  font-size: 2.5vw;
+  font-weight: bolder;
+  font-family:cursive;
+  margin-left: 14vw;
+}
+header div a:hover{
+  transition: 0.3s;
+  transform: scaleY(1.3);
+}
+header div a:not(:hover){
+  transition: 0.3s;
+  transform: scaleY(1);
+}
+
+
+.burger{
+  padding-top: 10vh;
+  width: 20%;
+  height: 800px;
+  display: inline;
+  justify-content: center;
+  position: fixed;
+  z-index: 100;
+  background-color: rgb(255, 249, 249);
+  margin-left:-150%;
+}
+.burgerBack{
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  z-index: 1;
+  margin-left: 20%;
+  display: none;
+}
+.burger.active .burgerBack{
+  display: inherit;
+}
+.burger.active{
+  transition: 0.3s;
+  margin-left: 0;
+}
+.burger:not(.active){
+  transition: 0.3s;
+}
+.burger p {
+  font-size: 2.5vw;
+  padding-top: 30px;
+  text-transform: uppercase;
+  transition: 0.2s;
+  cursor: pointer;
+}
+.burger p.currentTitle{
+  font-weight: 900;
+}
+.burger p:hover{
+  transform: scaleY(1.1);
+  transition: 0.2s;
+}
+
+p {
+	text-align: center;
+	margin: 0 auto;
+}
+
+.checkbox-green {
+	display: inline-block;
+  margin-top: 5px;
+	height: 28px;
+	line-height: 38px;
+	margin-right: 10px;
+	position: relative;
+	vertical-align: middle;
+	font-size: 24px;
+	user-select: none;
+}
+.checkbox-green .checkbox-green-switch {
+	display: inline-block;
+	height: 48px;
+	width: 90px;
+	box-sizing: border-box;
+	position: relative;
+	border-radius: 5px;
+	background: #848484;
+	transition: background-color 0.3s cubic-bezier(0, 1, 0.5, 1);
+}
+.checkbox-green .checkbox-green-switch:before {
+	content: attr(data-label-on);
+	display: inline-block;
+	box-sizing: border-box;
+	width: 55px;
+  height: 45px;
+	padding: 0 12px;
+	position: absolute;
+	top: 0;
+	left: 45px;
+	text-transform: uppercase;
+	text-align: center;
+	color: rgba(0, 0, 0, 0.5);
+	font-size: 10px;
+	line-height: 28px;
+  padding-top:10px ;
+}
+.checkbox-green .checkbox-green-switch:after {
+	content: attr(data-label-off);
+	display: inline-block;
+	box-sizing: border-box;
+	width: 44px;
+  height: 45px;
+	border-radius: 1px;
+	position: absolute;
+	top: 1px;
+	left: 1px;
+	z-index: 5;
+	text-transform: uppercase;
+	text-align: center;
+	background: rgb(255, 255, 255);
+	line-height: 26px;
+	font-size: 10px;
+	color: #777;
+  padding-top:10px ;
+	transition: transform 0.3s cubic-bezier(0, 1, 0.5, 1);
+}
+.checkbox-green input[type="checkbox"] {
+	display: block;
+	width: 0;
+	height: 0;
+	position: absolute;
+	z-index: -1;
+	opacity: 0;
+}
+.checkbox-green input[type="checkbox"]:checked + .checkbox-green-switch {
+	background-color: #ffe0e6;
+}
+.checkbox-green input[type="checkbox"]:checked + .checkbox-green-switch:before {
+	content: attr(data-label-off);
+	left: 0;
+}
+.checkbox-green input[type="checkbox"]:checked + .checkbox-green-switch:after {
+	content: attr(data-label-on);
+	color: #000000;
+	transform: translate3d(44px, 0, 0);
+}
+
+/* Hover */
+.checkbox-green input[type="checkbox"]:not(:disabled) + .checkbox-green-switch:hover {
+	cursor: pointer;
+}
+.checkbox-green input[type="checkbox"]:not(:disabled) + .checkbox-green-switch:hover:after {
+	box-shadow: 0 3px 3px rgba(0, 0, 0, 0.4);
+}
+
+/* Disabled */
+.checkbox-green input[type=checkbox]:disabled + .checkbox-green-switch {
+	opacity: 0.6;
+	filter: grayscale(50%);
+}
+
+/* Focus */
+.checkbox-green.focused .checkbox-green-switch:after {
+	box-shadow: inset 0px 0px 4px #ff5623;
+}

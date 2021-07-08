@@ -3,6 +3,7 @@ import { Page } from '../templates/page';
 import { Render } from '../game/game-render';
 import { CardsField } from '../card-field/card-field';
 import { ImageCategoryModel } from '../card/image-category-models';
+import { MainPage } from '../main-page/main-page';
 import './statistic-page.scss';
 
 const packs = ['action1', 'action2', 'animals1', 'animals2', 'cloth', 'emotions', 'sport', 'weather'];
@@ -112,6 +113,7 @@ export class Statistic extends Page {
 
   tableConstract(categories:ImageCategoryModel[][]) {
     const block = document.createElement('div');
+    block.className = 'table';
     let i = 0;
     this.titlePart(block);
     categories.forEach((categ:ImageCategoryModel[]) => {
@@ -133,10 +135,33 @@ export class Statistic extends Page {
   }
 
   async table() {
+    document.querySelector('.cards')?.remove();
+    document.querySelector('.table')?.remove();
     const res = await fetch('./test.json');
     const categories = await res.json();
     this.tableConstract(categories);
   }
+
+  startGame = () => {
+    const appElem = document.querySelector('body');
+    const categArr = document.querySelectorAll('.burger p');
+    categArr.forEach((categ) => {
+      categ.addEventListener('click', () => {
+        categArr.forEach((cat) => {
+          cat.classList.remove('currentTitle');
+        });
+        categ.classList.add('currentTitle');
+        sessionStorage.setItem('current', `${categ.textContent}`);
+        sessionStorage.setItem('currentID', `${categ.id}`);
+
+        if (appElem) {
+          console.log('312');
+          document.getElementById('current')?.children[1].remove();
+          new Render(appElem).newGame();
+        }
+      });
+    });
+  };
 
   render() {
     const body = document.querySelector('body');
@@ -144,11 +169,16 @@ export class Statistic extends Page {
       new CardsField().clearFormainPage();
       console.log(body.children[1]);
     }
+    document.querySelector('a[href=\'#statistic\']')?.addEventListener('click', () => {
+      this.table();
+    });
     sessionStorage.setItem('maincheck', '1');
     console.log('31s');
     const title = this.createHeader('');
     this.conteiner.append(title);
     this.table();
+    this.startGame();
+
     document.querySelector('footer')?.remove();
     return this.conteiner;
   }

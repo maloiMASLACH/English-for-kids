@@ -26,7 +26,7 @@ export class MainPage extends Page {
       result.append(text);
     } else {
       const sound = document.createElement('div');
-      sound.innerHTML = '<audio src="sucsess.mp3" autoplay="autoplay"></audio>';
+      sound.innerHTML = '<audio src="success.mp3" autoplay="autoplay"></audio>';
       result.append(sound);
       const img = document.createElement('img');
       img.src = 'success.jpg';
@@ -36,7 +36,7 @@ export class MainPage extends Page {
       result.append(text);
     }
     this.conteiner.append(result);
-    await delay(2000);
+    await delay(5000);
     await this.renderAgain();
   }
 
@@ -60,6 +60,9 @@ export class MainPage extends Page {
 
   createSound(textCon:string, shuffledArr:string[], card:Element) {
     if (textCon === shuffledArr[0]) {
+      const soundW = document.createElement('div');
+      soundW.innerHTML = '<audio src="correct.mp3" autoplay="autoplay"></audio>';
+      this.conteiner.append(soundW);
       const sound = document.createElement('div');
       sound.innerHTML = `<audio src="./audio/${sessionStorage.current}/${shuffledArr[1]}.mp3" autoplay="autoplay"></audio>`;
       this.conteiner.append(sound);
@@ -70,6 +73,9 @@ export class MainPage extends Page {
       shuffledArr.splice(0, 1);
       this.renderStar(1);
     } else {
+      const soundW = document.createElement('div');
+      soundW.innerHTML = '<audio src="error.mp3" autoplay="autoplay"></audio>';
+      this.conteiner.append(soundW);
       const val = localStorage.getItem(`${textCon}Loose`);
       if (val) localStorage.setItem(`${textCon}Loose`, `${+val + 1}`);
       console.log(localStorage.getItem(`${textCon}Loose`));

@@ -141,9 +141,10 @@ export class MainPage extends Page {
         categArr.forEach((cat) => {
           cat.classList.remove('currentTitle');
         });
+        categ.classList.add('currentTitle');
         sessionStorage.setItem('current', `${categ.textContent}`);
         sessionStorage.setItem('currentID', `${categ.id}`);
-        categ.classList.add('currentTitle');
+
         if (appElem) {
           new Render(appElem).newGame();
           this.startBtnCheck();
@@ -156,10 +157,18 @@ export class MainPage extends Page {
     document.querySelector('.repeatBTN')?.remove();
     const appElem = document.querySelector('body');
     const categArr = document.querySelectorAll('.main-page-content div');
+
     categArr.forEach((categ) => {
       categ.addEventListener('click', () => {
         sessionStorage.setItem('current', `${categ.children[1].textContent}`);
         sessionStorage.setItem('currentID', `${categ.children[1].id}`);
+        const categBur = document.querySelectorAll('.burger p');
+        categBur.forEach((burg) => {
+          burg.classList.remove('currentTitle');
+          if (burg.textContent === categ.children[1].textContent) {
+            burg.classList.add('currentTitle');
+          }
+        });
         if (appElem) {
           new Render(appElem).newGame();
           this.startBtnCheck();
